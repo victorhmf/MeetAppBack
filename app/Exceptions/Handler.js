@@ -30,8 +30,7 @@ class ExceptionHandler extends BaseExceptionHandler {
       const errorJson = await youch.toJSON()
       return response.status(error.status).send(errorJson)
     }
-
-    return response.status(error.status)
+    return response.status(error.status).send()
   }
 
   /**
