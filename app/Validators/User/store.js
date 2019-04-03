@@ -11,7 +11,7 @@ class UserStore {
     return {
       email: 'required|email|unique:users',
       username: 'required|unique:users',
-      password: 'required'
+      password: 'required|min:6'
     }
   }
 

@@ -17,4 +17,7 @@
 const Route = use('Route')
 
 Route.post('/users', 'UserController.store').validator('User/store')
+Route.put('/users/:id', 'UserController.update')
+  .validator('User/update')
+  .middleware(['auth'])
 Route.post('/sessions', 'SessionController.store').validator('session')

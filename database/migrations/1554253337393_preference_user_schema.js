@@ -3,9 +3,9 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema')
 
-class UserPreferenceSchema extends Schema {
+class PreferenceUserSchema extends Schema {
   up () {
-    this.create('user_preference', table => {
+    this.create('preference_user', table => {
       table.increments()
       table
         .integer('user_id')
@@ -26,8 +26,8 @@ class UserPreferenceSchema extends Schema {
   }
 
   down () {
-    this.drop('user_preference')
+    this.drop('preference_user')
   }
 }
 
-module.exports = UserPreferenceSchema
+module.exports = PreferenceUserSchema
