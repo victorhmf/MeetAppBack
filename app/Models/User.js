@@ -38,6 +38,10 @@ class User extends Model {
   preferences () {
     return this.belongsToMany('App/Models/Preference')
   }
+
+  meetups () {
+    return this.belongsToMany('App/Models/Meetup')
+  }
 }
 
 module.exports = User
