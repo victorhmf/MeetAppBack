@@ -40,7 +40,9 @@ class User extends Model {
   }
 
   meetups () {
-    return this.belongsToMany('App/Models/Meetup')
+    return this.belongsToMany('App/Models/Meetup').pivotModel(
+      'App/Models/MeetupUser'
+    )
   }
 }
 

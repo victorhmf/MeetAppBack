@@ -5,7 +5,9 @@ const Model = use('Model')
 
 class Meetup extends Model {
   users () {
-    return this.belongsToMany('App/Models/User')
+    return this.belongsToMany('App/Models/User').pivotModel(
+      'App/Models/MeetupUser'
+    )
   }
 
   preferences () {
