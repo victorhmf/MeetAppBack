@@ -18,6 +18,13 @@ class MeetupSchema extends Schema {
         .inTable('users')
         .onUpdate('cascade')
         .onDelete('set null')
+      table
+        .integer('file_id')
+        .unsigned()
+        .references('id')
+        .inTable('files')
+        .onUpdate('cascade')
+        .onDelete('set null')
       table.timestamps()
     })
   }

@@ -24,10 +24,10 @@ class MeetupController {
       'description',
       'location',
       'date',
-      'preferences'
+      'preferences',
+      'file_id'
     ])
 
-    console.log(auth.user)
     const meetup = await Meetup.create({ ...data, user_id: auth.user.id })
 
     if (preferences) {
