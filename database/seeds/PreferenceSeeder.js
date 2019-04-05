@@ -1,3 +1,4 @@
+/* eslint-disable no-return-await */
 'use strict'
 
 /*
@@ -16,12 +17,20 @@ const Preference = use('App/Models/Preference')
 
 class PreferenceSeeder {
   async run () {
-    await Preference.create({ title: 'Front-end' })
-    await Preference.create({ title: 'Back-end' })
-    await Preference.create({ title: 'Mobile' })
-    await Preference.create({ title: 'DevOps' })
-    await Preference.create({ title: 'Gestão' })
-    await Preference.create({ title: 'Marketing' })
+    const preferences = [
+      'Front-end',
+      'Back-end',
+      'Mobile',
+      'DevOps',
+      'Gestão',
+      'Marketing'
+    ]
+
+    await Promise.all(
+      preferences.map(
+        async preference => await Preference.create({ title: preference })
+      )
+    )
   }
 }
 
