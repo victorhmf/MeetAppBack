@@ -11,7 +11,38 @@ class MeetupController {
    * GET meetups
    *
    */
-  async index ({ request, response, view }) {}
+  async index ({ request, response, auth }) {
+    const { filter } = request.get()
+
+    await auth.user.load('preferences')
+    const userPreferences = auth.user
+      .getRelated('preferences')
+      .toJSON()
+      .map(preference => preference.id)
+
+    const meetups = await Meetup.query()
+      .where(function () {
+        if (filter === 'notsubscribed') {
+          this.whereDoesntHave('users', builder => {
+            builder.where({ user_id: auth.user.id })
+          })
+        } else if (filter === 'subscribed') {
+          this.whereHas('users', builder => {
+            builder.where({ user_id: auth.user.id })
+          })
+        } else if (filter === 'recommended') {
+          this.whereDoesntHave('users', builder => {
+            builder.where({ user_id: auth.user.id })
+          }).whereHas('preferences', builder => {
+            builder.whereIn('preference_id', userPreferences)
+          })
+        }
+      })
+      .with('preferences')
+      .fetch()
+
+    return meetups
+  }
 
   /**
    * Create/save a new meetup.
@@ -44,20 +75,6 @@ class MeetupController {
    *
    */
   async show ({ params, request, response, view }) {}
-
-  /**
-   * Update meetup details.
-   * PUT or PATCH meetups/:id
-   *
-   */
-  async update ({ params, request, response }) {}
-
-  /**
-   * Delete a meetup with id.
-   * DELETE meetups/:id
-   *
-   */
-  async destroy ({ params, request, response }) {}
 }
 
 module.exports = MeetupController
