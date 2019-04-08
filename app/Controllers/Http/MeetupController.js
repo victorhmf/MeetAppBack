@@ -1,6 +1,7 @@
 'use strict'
 
 const Meetup = use('App/Models/Meetup')
+const File = use('App/Models/File')
 
 /**
  * Resourceful controller for interacting with meetups
@@ -74,7 +75,17 @@ class MeetupController {
    * GET meetups/:id
    *
    */
-  async show ({ params, request, response, view }) {}
+  async show ({ params, request, response }) {
+    const meetupQuery = await Meetup.query()
+      .where({ id: params.id })
+      .withCount('users')
+      .fetch()
+
+    const [meetup] = meetupQuery.toJSON()
+    const file = await File.findOrFail(meetup.file_id)
+
+    return { ...meetup, file_url: file.toJSON().url }
+  }
 }
 
 module.exports = MeetupController
