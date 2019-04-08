@@ -23,20 +23,24 @@ class MeetupController {
 
     const meetups = await Meetup.query()
       .where(function () {
-        if (filter === 'notsubscribed') {
-          this.whereDoesntHave('users', builder => {
-            builder.where({ user_id: auth.user.id })
-          })
-        } else if (filter === 'subscribed') {
-          this.whereHas('users', builder => {
-            builder.where({ user_id: auth.user.id })
-          })
-        } else if (filter === 'recommended') {
-          this.whereDoesntHave('users', builder => {
-            builder.where({ user_id: auth.user.id })
-          }).whereHas('preferences', builder => {
-            builder.whereIn('preference_id', userPreferences)
-          })
+        switch (filter) {
+          case 'notsubscribed':
+            this.whereDoesntHave('users', builder => {
+              builder.where({ user_id: auth.user.id })
+            })
+            break
+          case 'subscribed':
+            this.whereHas('users', builder => {
+              builder.where({ user_id: auth.user.id })
+            })
+            break
+          case 'recommended':
+            this.whereDoesntHave('users', builder => {
+              builder.where({ user_id: auth.user.id })
+            }).whereHas('preferences', builder => {
+              builder.whereIn('preference_id', userPreferences)
+            })
+            break
         }
       })
       .with('preferences')
@@ -75,7 +79,7 @@ class MeetupController {
    * GET meetups/:id
    *
    */
-  async show ({ params, request, response }) {
+  async show ({ params }) {
     const meetupQuery = await Meetup.query()
       .where({ id: params.id })
       .withCount('users')

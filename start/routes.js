@@ -21,10 +21,13 @@ Route.post('/sessions', 'SessionController.store').validator('session')
 
 Route.group(() => {
   Route.put('/users/:id', 'UserController.update').validator('User/update')
+
   Route.get('/meetups', 'MeetupController.index')
   Route.post('/meetups', 'MeetupController.store').validator('Meetup/store')
   Route.get('/meetups/:id', 'MeetupController.show')
   Route.post('/meetups/:id/subscribe', 'SubscribeMeetupController.store')
+  Route.get('/search/meetups', 'SearchMeetupController.index')
+
   Route.get('/files/:id', 'FileController.show')
   Route.post('/files', 'FileController.store').validator('File/store')
 }).middleware(['auth'])
