@@ -21,7 +21,8 @@ class UserController {
     const { preferences, ...data } = request.only([
       'username',
       'password',
-      'preferences'
+      'preferences',
+      'firstLogin'
     ])
 
     user.merge(data)
