@@ -4,7 +4,6 @@
 const Env = use('Env')
 
 module.exports = {
-
   /*
   |--------------------------------------------------------------------------
   | Application Name
@@ -81,7 +80,6 @@ module.exports = {
     |
     */
     jsonpCallback: 'callback',
-
 
     /*
     |--------------------------------------------------------------------------
@@ -173,7 +171,7 @@ module.exports = {
     | based on HTTP headers/query string.
     |
     */
-    locale: 'en'
+    locale: 'pt'
   },
 
   logger: {

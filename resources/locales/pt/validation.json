@@ -1,0 +1,18 @@
+{
+  "email.required": "O email é obrigatório.",
+  "email.email": "O email deve ser um email válido.",
+  "email.unique": "O email já está sendo utilizado.",
+  "username.required": "O nome é obrigatório.",
+  "username.unique": "O nome já está sendo utilizado.",
+  "password.required": "A senha é obrigatória.",
+  "password.min": "A senha deve possuir no minímo 6 dígitos.",
+  "password.confirmed": "A confirmação de senha não corresponde.",
+  "preferences.min": "Escolha ao menos uma preferência.",
+  "title.required": "O título é obrigatório.",
+  "description.required": "A descrição é obrigatória.",
+  "date.required": "A data é obrigatória.",
+  "date.after": "A data deve ser após a data atual.",
+  "location.required": "A localização é obrigatória.",
+  "file.file": "O arquivo é inválido.",
+  "file.file_size": "O tamanho do arquivo deve ser menor que 2MB."
+}

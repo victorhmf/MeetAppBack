@@ -18,7 +18,9 @@ class SubscribeMeetupController {
     if (meetup.user_id === auth.user.id) {
       return response
         .status(400)
-        .send({ error: { message: 'Meetup owner can not subscribe it' } })
+        .send({
+          error: { message: 'O criador não pode se inscrever no meetup.' }
+        })
     }
 
     const meetupUser = await MeetupUser.query()
@@ -30,7 +32,7 @@ class SubscribeMeetupController {
 
     if (meetupUser.rows.length) {
       return response.status(400).send({
-        error: { message: 'You are already subscribed to this meetup ' }
+        error: { message: 'Você já está inscrito neste meetup.' }
       })
     }
 
