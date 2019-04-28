@@ -9,7 +9,7 @@ class FileStore {
 
   get rules () {
     return {
-      file: 'file'
+      file: 'file|file_ext:png,jpg,jpeg|file_size:2mb|file_types:image'
     }
   }
 

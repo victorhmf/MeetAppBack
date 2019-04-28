@@ -30,8 +30,9 @@ class UserController {
 
     if (preferences) {
       await user.preferences().sync(preferences)
-      await user.load('preferences')
     }
+    
+    await user.load('preferences')
 
     return user
   }

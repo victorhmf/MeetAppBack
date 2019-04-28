@@ -18,6 +18,7 @@ const Route = use('Route')
 
 Route.post('/users', 'UserController.store').validator('User/store')
 Route.post('/sessions', 'SessionController.store').validator('session')
+Route.get('/files/:id', 'FileController.show')
 
 Route.group(() => {
   Route.put('/users/:id', 'UserController.update').validator('User/update')
@@ -28,6 +29,5 @@ Route.group(() => {
   Route.post('/meetups/:id/subscribe', 'SubscribeMeetupController.store')
   Route.get('/search/meetups', 'SearchMeetupController.index')
 
-  Route.get('/files/:id', 'FileController.show')
   Route.post('/files', 'FileController.store').validator('File/store')
 }).middleware(['auth'])

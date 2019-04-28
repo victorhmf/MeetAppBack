@@ -22,6 +22,7 @@ class MeetupController {
       .map(preference => preference.id)
 
     const meetups = await Meetup.query()
+      .select('id', 'title', 'file_id')
       .where(function () {
         switch (filter) {
           case 'notsubscribed':
@@ -43,7 +44,8 @@ class MeetupController {
             break
         }
       })
-      .with('preferences')
+      .withCount('users as members')
+      .with('file', builder => builder.select('id'))
       .fetch()
 
     return meetups
@@ -82,13 +84,13 @@ class MeetupController {
   async show ({ params }) {
     const meetupQuery = await Meetup.query()
       .where({ id: params.id })
-      .withCount('users')
+      .withCount('users as members')
+      .with('file', builder => builder.select('id'))
       .fetch()
 
     const [meetup] = meetupQuery.toJSON()
-    const file = await File.findOrFail(meetup.file_id)
 
-    return { ...meetup, file_url: file.toJSON().url }
+    return meetup
   }
 }
 

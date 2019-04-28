@@ -18,7 +18,7 @@ class MeetupStore {
         rule('after', new Date())
       ],
       location: 'string|required',
-      preferences: 'array|min:1|max:6|required',
+      preferences: 'array|min:1|max:6',
       'preferences.*': 'range:0,7'
     }
   }
